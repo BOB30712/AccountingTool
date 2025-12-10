@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: accountingTool
+  datasource:
+    # 加上 AUTO_SERVER=TRUE 避免檔案鎖死
+    url: jdbc:h2:file:./data/expense-tracker;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ''
+  h2:
+    console:
+      enabled: true
+      path: /h2-console       # 預設就是這個，寫出來更明確
+      settings:
+        web-allow-others: false # 允許遠端連線 (視需求開啟)
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+      format_sql: true      # 讓 Console 印出的 SQL 自動排版，更易讀
