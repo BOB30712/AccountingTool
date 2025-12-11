@@ -31,6 +31,11 @@
 </properties>
 <dependencies>
   <dependency>
+    <groupId>org.liquibase</groupId>
+    <artifactId>liquibase-core</artifactId>
+    <!-- 版本由 spring-boot-starter-parent 自動管理，不用寫版本號 -->
+  </dependency>
+  <dependency>
     <groupId>com.h2database</groupId>
     <artifactId>h2</artifactId>
     <scope>runtime</scope>

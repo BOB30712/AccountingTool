@@ -11,13 +11,17 @@ spring:
     console:
       enabled: true
       path: /h2-console       # 預設就是這個，寫出來更明確
+      # http://localhost:8080/h2-console/
       settings:
         web-allow-others: false # 允許遠端連線 (視需求開啟)
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
       format_sql: true      # 讓 Console 印出的 SQL 自動排版，更易讀
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
