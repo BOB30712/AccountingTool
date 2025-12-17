@@ -28,4 +28,9 @@ public class ExpenseService {
         expense.setCategory("test");
         expenseRepository.save(expense);
     }
+
+    @Transactional
+    public Expense save(Expense expense){
+        return expenseRepository.save(expense);
+    }
 }
