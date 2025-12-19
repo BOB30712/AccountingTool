@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/expense") // 基礎路徑為 /expense
@@ -40,7 +41,7 @@ public class WebController {
         expense.setDescription(request.description());
         expense.setAmount(request.amount());
         expense.setDate(request.date());
-        expense.setAmount(request.amount());
+        expense.setCategory(request.category());
 
         ApiResponse<Expense> response = new ApiResponse<>(
             "success",
@@ -50,5 +51,20 @@ public class WebController {
         );
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Expense>> all(){
+        List<Expense> list = expenseService.all();
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Expense> search(@PathVariable Long id){
+        Expense expense =  expenseService.findById(id);
+
+        return new ResponseEntity<>(expense, HttpStatus.OK);
     }
 }

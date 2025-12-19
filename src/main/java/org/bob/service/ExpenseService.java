@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExpenseService {
@@ -32,5 +34,17 @@ public class ExpenseService {
     @Transactional
     public Expense save(Expense expense){
         return expenseRepository.save(expense);
+    }
+
+
+    @Transactional(readOnly = true)
+    public List<Expense> all(){
+        return expenseRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Expense findById(Long id){
+        Optional<Expense> expense = expenseRepository.findById(id);
+        return expense.orElseGet(expense::get);
     }
 }
