@@ -27,9 +27,6 @@ public class Expense {
     @Column(name = "date",nullable = false)
     private LocalDate date;
 
-    @Column(name = "category",nullable = false) // Maps a property to a specific column name
-    private String category;
-
     @CreationTimestamp      // 自動寫入建立時間
     @Column(name = "created_at", updatable = false) // Maps a property to a specific column name
     private LocalDateTime createdAt;
@@ -38,17 +35,30 @@ public class Expense {
     @Column(name = "updated_at") // Maps a property to a specific column name
     private LocalDateTime updatAt;
 
+    @ManyToOne(fetch = FetchType.LAZY,optional = true)
+    @JoinColumn(name="category_id")
+    private Category category;
+
 
     public Expense() {
     }
 
-    public Expense(String description, BigDecimal amount, LocalDate date, String category, LocalDateTime createdAt, LocalDateTime updatAt) {
+    public Expense(long id, String description, BigDecimal amount, LocalDate date, LocalDateTime createdAt, LocalDateTime updatAt, Category category) {
+        this.id = id;
         this.description = description;
         this.amount = amount;
         this.date = date;
-        this.category = category;
         this.createdAt = createdAt;
         this.updatAt = updatAt;
+        this.category = category;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public long getId() {
@@ -67,13 +77,6 @@ public class Expense {
         this.description = description;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

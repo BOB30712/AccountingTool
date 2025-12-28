@@ -1,3 +1,9 @@
 databaseChangeLog:
   - include:
       file: db/changelog/v001-create-expense-table.yaml
+  - include:
+      file: db/changelog/v002-create-category-table.yaml
+  - include:
+      file: db/changelog/v003-update-expense-columns.yaml
+  - include:
+      file: db/changelog/v004-drop-expense-columns.yaml

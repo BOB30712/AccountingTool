@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-12-28-add-columns-to-expense
+      author: bob
+      changes:
+        - addColumn:
+            tableName: expense
+            columns:
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: true

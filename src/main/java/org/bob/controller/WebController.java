@@ -2,6 +2,7 @@ package org.bob.controller;
 
 
 import jakarta.validation.Valid;
+import org.bob.dto.ExpnseResponseDTO;
 import org.bob.entity.Expense;
 import org.bob.record.ApiResponse;
 import org.bob.record.CreateExpenseRequest;
@@ -41,7 +42,7 @@ public class WebController {
         expense.setDescription(request.description());
         expense.setAmount(request.amount());
         expense.setDate(request.date());
-        expense.setCategory(request.category());
+        expense.setCategory(null);
 
         ApiResponse<Expense> response = new ApiResponse<>(
             "success",
@@ -55,8 +56,8 @@ public class WebController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<Expense>> all(){
-        List<Expense> list = expenseService.all();
+    public ResponseEntity<List<ExpnseResponseDTO>> all(){
+        List<ExpnseResponseDTO> list = expenseService.all();
 
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
